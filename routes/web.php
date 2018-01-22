@@ -20,10 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home/user', 'UserController@index');
-Route::get('/home/user/{id}', 'UserController@usuario');
-Route::post('/home/user/new', 'UserController@novo');
+Route::get('/home/user/{id}', 'UserController@usuario')->where('id', '[0-9]+');
+Route::match(['get', 'post'], '/home/user/{id}/edit', 'UserController@editar')->where('id', '[0-9]+');
+Route::match(['get', 'post'], '/home/user/new', 'UserController@novo');
 Route::post('/home/user/remove', 'UserController@remove');
-Route::post('/home/user/edit', 'UserController@editar');
+
 
 Route::get('/home/lista', 'ListaController@index');
 Route::get('/home/lista/{id}', 'ListaController@usuario');
