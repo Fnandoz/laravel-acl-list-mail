@@ -52,7 +52,7 @@ class UserController extends Controller
     public function editar(Request $request, $id)
     {
       if ($request->isMethod('post')) {
-        $novo_user = new User();
+        $novo_user = User::find($id);
         $novo_user->nome = $request->nome;
         $novo_user->email = $request->email;
         $novo_user->senha = $request->senha;
@@ -68,7 +68,8 @@ class UserController extends Controller
       }
 
       $usuario = User::find($id);
-      return view('users.edit', ['usuario'=>$usuario]);
+      $regras = Regras::all();
+      return view('users.edit', ['usuario'=>$usuario, 'regras'=>$regras]);
     }
 
 
