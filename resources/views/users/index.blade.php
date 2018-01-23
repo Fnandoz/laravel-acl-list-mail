@@ -17,7 +17,7 @@
       @foreach($usuario->regras as $regra)
         <li>{{$regra->nome}}</li>
       @endforeach
-      <ul>
+      </ul>
     </li>
   @endforeach
 </ul>
