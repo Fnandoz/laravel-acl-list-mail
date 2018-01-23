@@ -23,10 +23,11 @@ class ListaController extends Controller
   {
       if ($request->isMethod('post')) {
         $item = new Item();
-        $item->titulo = $request->titulo;
-        $item->descricao = $request->descricao;
+        $item->titulo = $request->input('titulo');
+        $item->descricao = $request->input('descricao');
+
         $item->save();
-        return redirect('lista.index');
+        return redirect('/home/lista');
       }
       return view('lista.new');
   }
@@ -35,7 +36,7 @@ class ListaController extends Controller
   {
     $item = Item::find($request->id);
     $item->delete();
-    return redirect('lista.index');
+    return redirect('/home/lista');
   }
 
   public function editar(Request $request, $id)
@@ -45,7 +46,7 @@ class ListaController extends Controller
       $item->titulo = $request->titulo;
       $item->descricao = $request->descricao;
       $item->save();
-      return redirect('lista.index');
+      return redirect('/home/lista');
     }
     $item = Item::find($request->id);
     return view('lista.edit', ['item'=>$item]);

@@ -27,7 +27,7 @@ Route::post('/home/user/remove', 'UserController@remove');
 
 
 Route::get('/home/lista', 'ListaController@index')->name('lista.index');
-Route::get('/home/lista/{id}', 'ListaController@item');
-Route::post('/home/lista/new', 'ListaController@novo');
+Route::get('/home/lista/{id}', 'ListaController@item')->where('id', '[0-9]+');
+Route::match(['get', 'post'], '/home/lista/new', 'ListaController@novo');
 Route::post('/home/lista/remove', 'ListaController@remove');
-Route::post('/home/lista/edit', 'ListaController@editar');
+Route::match(['get', 'post'], '/home/lista/{id}/edit', 'ListaController@editar')->where('id', '[0-9]+');
