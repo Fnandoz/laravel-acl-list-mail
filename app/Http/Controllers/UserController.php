@@ -38,7 +38,7 @@ class UserController extends Controller
         $novo_user->password = bcrypt($request->senha);
         $novo_user->save();
 
-        if($request->regras){ 
+        if($request->regras){
           foreach ($request->regras as $regra) {
             $novo_user->regras()->attach(Regras::where('id', '=', $regra)->first());
           }
