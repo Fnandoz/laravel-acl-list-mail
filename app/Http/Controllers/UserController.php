@@ -38,7 +38,7 @@ class UserController extends Controller
         $novo_user->password = bcrypt($request->senha);
         $novo_user->save();
 
-        if(count($request->regras) > 0){
+        if($request->regras){
           foreach ($request->regras as $regra) {
             $novo_user->regras()->attach(Regras::where('id', '=', $regra)->first());
           }
@@ -56,7 +56,7 @@ class UserController extends Controller
       $request->user()->autorizaRegras(['master', 'user.view', 'user.delete']);
       $usuario = User::find($request->id);
       $usuario->delete();
-      return view('users.index');
+      return redirect('/home/user');
     }
 
     public function editar(Request $request, $id)

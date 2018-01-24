@@ -14,7 +14,14 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in! <br>
+
+                    @if(Auth::user()->autorizaRegras([
+                    'master', 'lista.view', 'lista.create', 'lista.update', 'lista.delete',
+                     'user.view', 'user.create', 'user.update', 'user.delete']))
+                     <a href="/home/user">Usuários</a>
+                     <a href="/home/lista">Lista</a>
+                    @endif
                 </div>
             </div>
         </div>

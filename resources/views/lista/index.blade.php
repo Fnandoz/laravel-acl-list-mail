@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
+<a href="/home/lista/new">Novo</a>
 <ul>
   @foreach($lista as $item)
   <li>
