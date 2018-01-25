@@ -17,10 +17,12 @@
                     You are logged in! <br>
 
                     @if(Auth::user()->checaRegras([
-                    'master', 'lista.view', 'lista.create', 'lista.update', 'lista.delete',
-                     'user.view', 'user.create', 'user.update', 'user.delete']))
-                     <a href="/home/user">Usuários</a>
+                    'master', 'lista.view', 'lista.create', 'lista.update', 'lista.delete']))
                      <a href="/home/lista">Lista</a>
+                     @endif
+                     @if(Auth::user()->checaRegras([
+                     'master', 'user.view', 'user.create', 'user.update', 'user.delete']))
+                     <a href="/home/user">Usuários</a>
                     @endif
                 </div>
             </div>

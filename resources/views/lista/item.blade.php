@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
 
-{{$item}}
+Titulo {{$item->titulo}} <br>
+Descrição {{$item->descricao}}<br>
+<a href="/home/user/{{$usuario->id}}">{{$usuario->email}}</a>
 
 @stop

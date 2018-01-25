@@ -6,7 +6,6 @@
   @foreach($lista as $item)
   <li>
     {{$item->titulo}}
-    {{$item->descricao}}
     <a href="/home/lista/{{$item->id}}">Ver</a>
     <a href="/home/lista/{{$item->id}}/edit">Editar</a>
     <form action="/home/lista/remove" method="post">

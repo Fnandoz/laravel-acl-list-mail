@@ -18,7 +18,7 @@ class ListaController extends Controller
   public function index(Request $request)
   {
     $request->user()->autorizaRegras(['master', 'lista.view', 'lista.create', 'lista.update', 'lista.delete']);
-    $lista = Item::all();
+    $lista = Item::where('user_id', '=', Auth::id())->orWhere('publico', '=', 1)->get();
     return view('lista.index', ['lista'=>$lista]);
   }
 
@@ -26,7 +26,8 @@ class ListaController extends Controller
   {
     $request->user()->autorizaRegras(['master', 'lista.view', 'lista.update', 'lista.delete', 'lista.create']);
     $item = Item::find($id);
-    return view('lista.item', ['item'=>$item]);
+    $usuario = User::find($item->user_id);
+    return view('lista.item', ['item'=>$item, 'usuario'=>$usuario]);
   }
 
   public function novo(Request $request)
@@ -36,8 +37,14 @@ class ListaController extends Controller
         $item = new Item();
         $item->titulo = $request->input('titulo');
         $item->descricao = $request->input('descricao');
-
+        if ($request->input('publico')=='on') {
+          $item->publico = true;
+        }else{
+          $item->publico = false;
+        }
+        $item->user_id = Auth::id();
         $item->save();
+
         return redirect('/home/lista');
       }
       return view('lista.new');

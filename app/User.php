@@ -33,6 +33,7 @@ class User extends Authenticatable
       return $this->belongsToMany(Regras::class);
     }
 
+
     /**
      * @param string|array $regras
      */
