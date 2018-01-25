@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Item;
 use App\User;
 
@@ -27,13 +28,19 @@ class ListaController extends Controller
     $request->user()->autorizaRegras(['master', 'lista.view', 'lista.update', 'lista.delete', 'lista.create']);
     $item = Item::find($id);
     $usuario = User::find($item->user_id);
-    return view('lista.item', ['item'=>$item, 'usuario'=>$usuario]);
+    $foto = Storage::url($item->foto);
+    $pdf = Storage::url($item->pdf);
+
+    return view('lista.item', ['item'=>$item, 'usuario'=>$usuario, 'foto'=>$foto, 'pdf'=>$pdf]);
   }
 
   public function novo(Request $request)
   {
     $request->user()->autorizaRegras(['master', 'lista.create']);
       if ($request->isMethod('post')) {
+        $path_image = $request->photo->store('public/images');
+        $path_pdf = $request->pdf->store('public/pdf');
+
         $item = new Item();
         $item->titulo = $request->input('titulo');
         $item->descricao = $request->input('descricao');
@@ -42,6 +49,8 @@ class ListaController extends Controller
         }else{
           $item->publico = false;
         }
+        $item->foto = $path_image;
+        $item->pdf = $path_pdf;
         $item->user_id = Auth::id();
         $item->save();
 
