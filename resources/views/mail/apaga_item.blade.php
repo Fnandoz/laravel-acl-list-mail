@@ -1,0 +1,2 @@
+item apagado.
+Titulo: {{$titulo}}

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Regras;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NovoUsuarioAdicionado;
 
 class UserController extends Controller
 {
@@ -43,6 +45,9 @@ class UserController extends Controller
             $novo_user->regras()->attach(Regras::where('id', '=', $regra)->first());
           }
         }
+        
+        $when = now()->addSeconds(5);
+        Mail::to($novo_user->email)->later($when, new NovoUsuarioAdicionado($novo_user));
 
         return redirect('/home/user');
       }
