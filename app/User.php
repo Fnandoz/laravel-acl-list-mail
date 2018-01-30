@@ -2,13 +2,12 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Item;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
-    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -66,4 +65,13 @@ class User extends Authenticatable
        {
          return null !== $this->regras()->where('nome', $regra)->first();
        }
+
+
+       /**
+        * Apaga todas as regras atribuidas ao usuário
+        */
+        public function apagaRegras()
+        {
+          DB::table('regras_user')->where('user_id', '=', $this->id)->delete();
+        }
 }

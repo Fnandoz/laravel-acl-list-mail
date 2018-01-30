@@ -11,6 +11,7 @@ use App\Mail\ApagaItem;
 use App\Item;
 use App\User;
 
+
 class ListaController extends Controller
 {
 
@@ -80,8 +81,8 @@ class ListaController extends Controller
     $request->user()->autorizaRegras(['master', 'lista.view', 'lista.delete']);
     $item = Item::find($request->id);
 
-    $when = now()->addSeconds(5);
-    Mail::to($request->user())->later($when, new ApagaItem('A'));
+    //$when = now()->addSeconds(5);
+    //Mail::to($request->user())->later($when, new ApagaItem('A'));
 
     Storage::delete($item->foto);
     Storage::delete($item->pdf);

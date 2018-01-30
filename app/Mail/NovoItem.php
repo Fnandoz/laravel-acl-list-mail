@@ -30,6 +30,7 @@ class NovoItem extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.novo_item')->with(['item'=>$this->item]);
+        return $this->view('mail.novo_item')
+                    ->with(['item'=>$this->item]);
     }
 }

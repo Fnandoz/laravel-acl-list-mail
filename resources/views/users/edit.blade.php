@@ -7,7 +7,7 @@
               <div class="panel panel-default">
                 <form action="/home/user/{{$usuario->id}}/edit" method="POST">
                   {{csrf_field()}}
-                  <input type="text" placeholder="Nome" value="{{$usuario->nome}}" name="nome">
+                  <input type="text" placeholder="Nome" value="{{$usuario->name}}" name="nome">
                   <input type="email" placeholder="E-mail" value="{{$usuario->email}}" name="email">
                   <input type="password" placeholder="Senha" name="senha">
                   <br>

@@ -8,6 +8,7 @@ use App\Regras;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NovoUsuarioAdicionado;
 
+
 class UserController extends Controller
 {
 
@@ -45,7 +46,7 @@ class UserController extends Controller
             $novo_user->regras()->attach(Regras::where('id', '=', $regra)->first());
           }
         }
-        
+
         $when = now()->addSeconds(5);
         Mail::to($novo_user->email)->later($when, new NovoUsuarioAdicionado($novo_user));
 
@@ -60,6 +61,7 @@ class UserController extends Controller
     {
       $request->user()->autorizaRegras(['master', 'user.view', 'user.delete']);
       $usuario = User::find($request->id);
+      $usuario->apagaRegras();
       $usuario->delete();
       return redirect('/home/user');
     }
@@ -73,7 +75,7 @@ class UserController extends Controller
         $novo_user->email = $request->email;
         $novo_user->password = bcrypt($request->senha);
         $novo_user->save();
-
+        $novo_user->apagaRegras();
         if(count($request->regras) > 0){
           foreach ($request->regras as $regra) {
             $novo_user->regras()->attach(Regras::where('id', '=', $regra)->first());
