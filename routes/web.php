@@ -31,3 +31,8 @@ Route::get('/home/lista/{id}', 'ListaController@item')->where('id', '[0-9]+');
 Route::match(['get', 'post'], '/home/lista/new', 'ListaController@novo');
 Route::post('/home/lista/remove', 'ListaController@remove');
 Route::match(['get', 'post'], '/home/lista/{id}/edit', 'ListaController@editar')->where('id', '[0-9]+');
+
+Route::get('erro', function()
+{
+  App::abort(500);
+});
