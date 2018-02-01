@@ -1,2 +1,6 @@
-# Jobs events
-https://laravel.com/docs/5.5/queues
+# Laravel ACL teste
+## Comandos necessários
+####
+- php artisan migrate:refresh --seed
+- php artisan queue:work
+- php artisan serve
