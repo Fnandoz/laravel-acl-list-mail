@@ -1,4 +1,4 @@
-# Laravel ACL teste
+# Laravel ACL teste com e-mail
 ## Comandos necessários
 ####
 - php artisan migrate:refresh --seed
